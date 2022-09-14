@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 project(gl_play)
 
-find_package(Boost REQUIRED COMPONENTS filesystem)
 
 set(LIB_HEADER_FILES
     include/glad/glad.h
@@ -35,7 +34,7 @@ set_target_properties(musa_gl_libs
 
     )
 
-target_link_libraries(musa_gl_libs ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} GLU GLEW glfw dl assimp )
+target_link_libraries(musa_gl_libs ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} GLU GLEW glfw dl)
 
 
 find_package(OpenGL REQUIRED)
@@ -58,4 +57,4 @@ include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} ${GLEW_INCLUDE
     )
 
 
-target_link_libraries(gl_play  musa_gl_libs Boost::filesystem)
+target_link_libraries(gl_play  musa_gl_libs)
