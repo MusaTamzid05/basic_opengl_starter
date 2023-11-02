@@ -46,6 +46,7 @@ set(SOURCE_FILES
     src/main.cpp
     src/util.cpp
     src/display.cpp
+    src/triangle.cpp
     )
 
 add_executable(gl_play  ${SOURCE_FILES})

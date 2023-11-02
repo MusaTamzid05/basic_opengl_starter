@@ -8,21 +8,20 @@
 #include <sstream>
 #include <iostream>
 
-namespace OpenGLUtil {
 
-    class Shader {
+class Shader {
 
-        public:
+    public:
 
-            unsigned int ID;
-            Shader(const char* vertexPath,const char* fragmentPath);
-            virtual ~Shader(){}
+        unsigned int ID;
+        Shader(const char* vertexPath,const char* fragmentPath);
+        virtual ~Shader(){}
 
 
-            void use();
+        void use();
 
-         
-            void setBool(const std::string &name, bool value) const {         
+     
+        void setBool(const std::string &name, bool value) const {         
             glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value); 
         }
         // ------------------------------------------------------------------------
@@ -79,24 +78,21 @@ namespace OpenGLUtil {
         }
 
 
-        private:
+    private:
 
-            std::string vertex_shader_src;
-            std::string fragment_shader_src;
-
-
-
-            bool read_source_from(const std::string& vertex_shader_path , const std::string& fragment_shader_path);
+        std::string vertex_shader_src;
+        std::string fragment_shader_src;
 
 
-            void compileShader(GLenum shader_type , unsigned int& shader_index , const char* code , const std::string& shader_name);
-            void link_program(unsigned int vertex_shader_index , unsigned fragment_shader_index);
 
-            void check_compile_error(unsigned int& shader_index , const std::string& type);
+        bool read_source_from(const std::string& vertex_shader_path , const std::string& fragment_shader_path);
 
-    };
+
+        void compileShader(GLenum shader_type , unsigned int& shader_index , const char* code , const std::string& shader_name);
+        void link_program(unsigned int vertex_shader_index , unsigned fragment_shader_index);
+
+        void check_compile_error(unsigned int& shader_index , const std::string& type);
+
 };
-
-
 
 #endif

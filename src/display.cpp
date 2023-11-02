@@ -30,6 +30,8 @@ const int width , const int height ):m_close(false)   {
             exit(1);
         }
 
+        triangle = new Triangle();
+
 
 
 
@@ -69,6 +71,8 @@ const int width , const int height ):m_close(false)   {
 
         glClearColor(0.2f , 0.3f , 0.3f , 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        triangle->render();
 
     }
 

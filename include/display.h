@@ -5,6 +5,7 @@
 #include "gl_headers.h"
 
 #include <glm/glm.hpp>
+#include "triangle.h"
 
 namespace Engine {
 
@@ -36,6 +37,8 @@ namespace Engine {
             static void scroll_callback(GLFWwindow* window , double xoffset, double yoffset);
 
             void set_callbacks(bool capture_mouse = false);
+
+            Triangle* triangle;
 
 
 
