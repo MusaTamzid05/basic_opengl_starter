@@ -1,5 +1,7 @@
 #include "triangle.h"
 #include "shader.h"
+#include "camera.h"
+#include "glm/gtc/matrix_transform.hpp"
 
 
 TriangleMesh::TriangleMesh() {
@@ -40,6 +42,17 @@ Triangle::~Triangle() {
 
 void Triangle::render() {
     m_shader->use();
+
+    glm::mat4 projection = Camera::get_instance()->projection;
+    glm::mat4 view = Camera::get_instance()->get_view_matrix();
+    glm::mat4 position = glm::mat4(1.0f);
+    position = glm::translate(position, glm::vec3(0.0f));
+
+
+    m_shader->setMat4("projection", projection);
+    m_shader->setMat4("view", view);
+    m_shader->setMat4("model", position);
+
     mesh.render();
 
 

@@ -19,8 +19,11 @@ namespace Engine {
             Display(const std::string& window_name , const int width , const int height);
             virtual ~Display();
 
+            void run();
+
             void process_input();
             void update();
+            void render();
             void clear();
 
             bool is_close() { return m_close; }
@@ -36,7 +39,10 @@ namespace Engine {
             static void mouse_callback(GLFWwindow* window , double xpos , double ypos);
             static void scroll_callback(GLFWwindow* window , double xoffset, double yoffset);
 
-            void set_callbacks(bool capture_mouse = false);
+            void set_callbacks(bool capture_mouse = true);
+
+            float delta_time;
+            float last_frame;
 
             Triangle* triangle;
 

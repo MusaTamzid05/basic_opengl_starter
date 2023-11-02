@@ -1,4 +1,5 @@
 #include "display.h"
+#include "camera.h"
 #include <iostream>
 
 
@@ -30,6 +31,9 @@ const int width , const int height ):m_close(false)   {
             exit(1);
         }
 
+        last_frame = 0.0f;
+        delta_time = 0.0f;
+
         triangle = new Triangle();
 
 
@@ -38,8 +42,19 @@ const int width , const int height ):m_close(false)   {
     }
 
     Display::~Display() {
-
         glfwTerminate();
+
+    }
+
+    void Display::run() {
+
+        while(!m_close) {
+            update();
+            render();
+            process_input();
+            clear();
+
+        }
 
     }
 
@@ -61,14 +76,15 @@ const int width , const int height ):m_close(false)   {
 
 
     void Display::update() {
+        Camera::get_instance()->update_camera_vectors();
 
-        glfwSwapBuffers(m_window);
-        glfwPollEvents();
+        float current_frame = glfwGetTime();
+        delta_time = current_frame - last_frame;
+        last_frame = current_frame;
+
     }
 
-    void Display::clear() {
-
-
+    void Display::render() {
         glClearColor(0.2f , 0.3f , 0.3f , 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -76,9 +92,14 @@ const int width , const int height ):m_close(false)   {
 
     }
 
+    void Display::clear() {
+        glfwSwapBuffers(m_window);
+        glfwPollEvents();
+
+    }
+
 
     void Display::frambuffer_size_callback(GLFWwindow* window , int width , int height) {
-
         glViewport(0 , 0 , width , height);
     }
 
@@ -95,6 +116,19 @@ const int width , const int height ):m_close(false)   {
 
         if(glfwGetKey(m_window ,GLFW_KEY_ESCAPE) == GLFW_PRESS)
             m_close = true;
+
+
+        if(glfwGetKey(m_window, GLFW_KEY_W) == GLFW_PRESS)
+            Camera::get_instance()->process_keyboard(Camera::Camera_Movement::FORWARD, delta_time);
+
+        if(glfwGetKey(m_window, GLFW_KEY_S) == GLFW_PRESS)
+            Camera::get_instance()->process_keyboard(Camera::Camera_Movement::BACKWARD, delta_time);
+
+        if(glfwGetKey(m_window, GLFW_KEY_A) == GLFW_PRESS)
+            Camera::get_instance()->process_keyboard(Camera::Camera_Movement::LEFT, delta_time);
+
+        if(glfwGetKey(m_window, GLFW_KEY_D) == GLFW_PRESS)
+            Camera::get_instance()->process_keyboard(Camera::Camera_Movement::RIGHT, delta_time);
 
 
     }
