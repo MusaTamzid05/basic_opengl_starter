@@ -1,10 +1,11 @@
 #include <iostream>
+#include "const.h"
 #include "display.h"
 
 
 int main(int argc , char** argv) {
 
-    Engine::Display display("Display" , 800 , 600);
+    Display display("Display" , SCREEN_WIDTH, SCREEN_HEIGHT);
     display.run();
 
 }

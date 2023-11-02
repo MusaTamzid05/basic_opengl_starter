@@ -7,52 +7,51 @@
 #include <glm/glm.hpp>
 #include "triangle.h"
 
-namespace Engine {
 
 
 
-    class Display {
+class Display {
 
 
-        public:
+    public:
 
-            Display(const std::string& window_name , const int width , const int height);
-            virtual ~Display();
+        Display(const std::string& window_name , const int width , const int height);
+        virtual ~Display();
 
-            void run();
+        void run();
 
-            void process_input();
-            void update();
-            void render();
-            void clear();
+        void process_input();
+        void update();
+        void render();
+        void clear();
 
-            bool is_close() { return m_close; }
+        bool is_close() { return m_close; }
 
-            GLFWwindow* get_window() { return m_window; }
+        GLFWwindow* get_window() { return m_window; }
 
-        protected:
+    protected:
 
-            GLFWwindow* m_window;
-            bool m_close;
-            
-            static void frambuffer_size_callback(GLFWwindow* window , int width , int height);
-            static void mouse_callback(GLFWwindow* window , double xpos , double ypos);
-            static void scroll_callback(GLFWwindow* window , double xoffset, double yoffset);
+        GLFWwindow* m_window;
+        bool m_close;
+        
+        static void frambuffer_size_callback(GLFWwindow* window , int width , int height);
+        static void mouse_callback(GLFWwindow* window , double xpos , double ypos);
+        static void scroll_callback(GLFWwindow* window , double xoffset, double yoffset);
 
-            void set_callbacks(bool capture_mouse = true);
+        void set_callbacks(bool capture_mouse = true);
 
-            float delta_time;
-            float last_frame;
+        float delta_time;
+        float last_frame;
 
-            Triangle* triangle;
-
+        Triangle* triangle;
 
 
 
 
-    };
-    
 
 };
+
+
+
 
 #endif
