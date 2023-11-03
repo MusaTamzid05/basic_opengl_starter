@@ -47,7 +47,7 @@ Display::~Display() {
 
 void Display::run() {
 
-    while(!m_close) {
+    while(!m_close && !glfwWindowShouldClose(m_window)) {
         update();
         render();
         process_input();
